@@ -1,0 +1,49 @@
+{
+  "name": "REDCap MCP Gateway",
+  "namespace": "REDCapMcpGateway",
+  "description": "Provides narrowly scoped, token-authenticated REDCap API actions for an MCP transport server.",
+  "documentation": "README.md",
+  "authors": [
+    {
+      "name": "REDCap Administrator",
+      "email": "redcap-admin@example.invalid",
+      "institution": "Local REDCap Instance"
+    }
+  ],
+  "framework-version": 16,
+  "project-settings": [
+    {
+      "key": "allow-identifiers",
+      "name": "Allow REDCap Identifier fields to be exported through MCP",
+      "type": "checkbox",
+      "required": false
+    },
+    {
+      "key": "minimum-aggregate-cell-size",
+      "name": "Minimum cell size for MCP identifier aggregates",
+      "type": "text",
+      "default": "5",
+      "required": false
+    }
+  ],
+  "api-actions": {
+    "project-overview": { "description": "Returns read-only project context for reporting." },
+    "project-schema": {
+      "description": "Returns the data dictionary for the API token's project. The token owner must have Project Design/Setup rights. Optional fields[] and forms[] parameters limit the result."
+    },
+    "project-structure": { "description": "Returns read-only reporting context: arms, events, form/event mapping, repeating configuration, and data access groups." },
+    "list-reports": { "description": "Lists saved reports in the API token's project." },
+    "get-report": { "description": "Exports a bounded page of a saved report's data as JSON. Specify report-id; optional limit (maximum 1000) and offset." },
+    "export-records": { "description": "Exports a bounded, read-only page of selected fields or forms. Requires fields[] or forms[]; supports records[], events[], groups[], filter_logic, raw_or_label, and limit (maximum 1000)." },
+    "summarize-fields": { "description": "Returns missingness and frequency summaries for selected fields, with optional record/event/DAG/filter scoping. Maximum 5000 rows analyzed." },
+    "summarize-report": { "description": "Returns missingness and frequency summaries for fields in a saved report. Specify report-id; maximum 5000 rows analyzed." },
+    "aggregate-identifier-fields": { "description": "Returns privacy-protected aggregates for Identifier fields without returning any record-level values. Supports numeric means, date-of-birth to age, and cell-size-suppressed categorical counts." },
+    "aggregate-categorical-counts": { "description": "Returns a privacy-protected, full-project breakdown for one coded categorical field. Categories below the effective minimum cell size are individually suppressed; caller-defined cohorts and pagination are not permitted." },
+    "aggregate-checkbox-counts": { "description": "Returns a privacy-protected, full-project count for each option of one checkbox field with per-option small-cell suppression." },
+    "aggregate-numeric-distribution": { "description": "Returns a privacy-protected, full-project five-bin distribution for one validated numeric field with per-bin small-cell suppression." },
+    "aggregate-age-distribution": { "description": "Returns a privacy-protected, full-project age-band distribution derived from one date field with per-band small-cell suppression." },
+    "aggregate-date-distribution": { "description": "Returns a privacy-protected, full-project year distribution for one date field with per-year small-cell suppression." },
+    "aggregate-completion-counts": { "description": "Returns privacy-protected, full-project form completion-status counts with per-status small-cell suppression." },
+    "aggregate-missingness": { "description": "Returns privacy-protected, full-project missing/nonmissing counts for selected fields with per-cell small-cell suppression." }
+  }
+}
