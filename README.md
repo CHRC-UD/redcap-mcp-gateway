@@ -5,6 +5,20 @@ This External Module is the REDCap-side backend for a Model Context Protocol
 code for each HTTP request, while an MCP server needs a persistent stdio or
 Streamable HTTP transport.
 
+## Agent workflow skill
+
+[`redcap-gateway-skill.md`](redcap-gateway-skill.md)
+is the companion agent skill for analyzing data through a connector backed by
+this module. It covers project discovery, schema-first tool use, pagination,
+identifier handling, disclosure-safe aggregates, and validation of aggregate
+results. Load it for REDCap analysis work; consult the connector's live,
+auto-generated tool/schema reference for the authoritative current method
+names and argument schemas.
+
+The skill contains no API tokens or project data. It deliberately treats the
+gateway's identifier controls and minimum-cell-size suppression as hard
+boundaries, not workarounds.
+
 ## Reporting API actions
 
 All actions are read-only, operate only on the calling project-bound API token,
